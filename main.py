@@ -1,6 +1,11 @@
 from flask import Flask, request
+import os
+from dotenv import load_dotenv
 from bot import bot
-from config import BOT_API
+
+load_dotenv()
+
+BOT_API = os.getenv("BOT_API")
 
 app = Flask(__name__)
 
