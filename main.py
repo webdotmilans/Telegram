@@ -15,7 +15,7 @@ def handle_webhook():
 
 @app.route('/setwebhook', methods=['GET', 'POST'])
 def set_webhook():
-    s = bot.set_webhook(url=f"https://your-domain.com/{BOT_API}")
+    s = bot.set_webhook(url=f"https://telegram-bot4.onrender.com/{BOT_API}")
     if s:
         return "webhook setup ok"
     else:
