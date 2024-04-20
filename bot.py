@@ -18,7 +18,7 @@ def ChatModal(prompt):
         model="gpt-3.5-turbo-instruct",
         prompt=chatStr,
         temperature=1,
-        max_tokens=256, 
+        max_tokens=256,
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0
@@ -33,7 +33,7 @@ bot = telebot.TeleBot(BOT_API)
 def start(message):
     bot.reply_to(message, "Hello welcome to new bot")
 
-@bot.message_handler()  
+@bot.message_handler()
 def chat(message):
     try:
         reply = ChatModal(message.text)
@@ -42,4 +42,3 @@ def chat(message):
         bot.reply_to(message, e)
 
 print("Bot Started...")
-# bot.polling()

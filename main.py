@@ -1,25 +1,29 @@
 from flask import Flask, request
 import os
 from dotenv import load_dotenv
-from bot import bot
+from bot import bot, BOT_API
 
 load_dotenv()
-
-BOT_API = os.getenv("BOT_API")
 
 app = Flask(__name__)
 
 @app.route('/' + BOT_API, methods=['POST'])
 def handle_webhook():
-    update = request.get_json()
-    bot.process_new_updates([telebot.types.Update.de_json(update)])
-    return "!", 200
+    update = telebot.types.Update.de_json(request.get_json(force=True), bot)
+    bot.process_new_updates([update])
+    return "ok", 200
+
+@app.route('/setwebhook', methods=['GET', 'POST'])
+def set_webhook():
+    s = bot.set_webhook(url=f"https://your-domain.com/{BOT_API}")
+    if s:
+        return "webhook setup ok"
+    else:
+        return "webhook setup failed"
 
 @app.route('/')
 def home():
     return "Bot is running!"
 
 if __name__ == '__main__':
-    bot.remove_webhook()
-    # bot.polling()
     app.run(host='0.0.0.0', port=5000)
