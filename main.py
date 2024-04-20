@@ -2,6 +2,7 @@ from flask import Flask, request
 import os
 from dotenv import load_dotenv
 from bot import bot, BOT_API
+import telebot
 
 load_dotenv()
 
