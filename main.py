@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/' + BOT_API, methods=['POST'])
 def handle_webhook():
-    update = telebot.types.Update.de_json(request.get_json(force=True), bot)
+    update = telebot.types.Update.de_json(request.get_json(force=True))
     bot.process_new_updates([update])
     return "ok", 200
 
