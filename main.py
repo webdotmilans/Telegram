@@ -21,5 +21,5 @@ def home():
 
 if __name__ == '__main__':
     bot.remove_webhook()
-    bot.polling()
+    # bot.polling()
     app.run(host='0.0.0.0', port=5000)
